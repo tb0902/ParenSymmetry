@@ -1,8 +1,7 @@
 
 package src.main.java;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+
 
 public class ParenSymmetry {
 
@@ -48,7 +47,7 @@ public class ParenSymmetry {
     private Boolean isBalanced(String s) {
         int counter = 0; //makes a counter and sets it to 0
         for (char ch : s.toCharArray()) //goes through each char in the loop
-            if (s.toCharArray()[0] == ')') {
+            if (s.toCharArray()[0] == ')') { //if the string begins with an open parenthesis its false immediately
                 return false;
             }
             else if (ch == '(') {
@@ -64,24 +63,21 @@ public class ParenSymmetry {
 
 
     private void checkFile(String filename) {
-        Scanner reader = null; // open file named filename
         try {
-            reader = new Scanner(new File("filename"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            FileReader opensFile = new FileReader(filename);
+            BufferedReader readsFile = new BufferedReader(opensFile);
+                while (filename == readsFile.readLine());
+
+                System.out.println(isBalanced(filename));
         }
-        while (reader.hasNextLine()) {
-                System.out.println(reader.hasNextLine());
-            }
-
-            reader.close();
-
+        catch (IOException e) {
+                System.err.println("Caught IOException:");
+        }
+}
         // for each line in the file
       // read the line
 
         // print whether or not the line's parenthesis are balanced
         }
         // CLOSE the file
-
-    }
 
