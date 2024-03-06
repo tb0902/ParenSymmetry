@@ -1,6 +1,7 @@
 
 package src.main.java;
 import java.io.*;
+import java.util.Scanner;
 
 
 public class ParenSymmetry {
@@ -29,7 +30,7 @@ public class ParenSymmetry {
         }
         printResult(trues, true);
 
-
+        ps.checkFile("TestStrings0.txt");
     }
 
     private static void printResult(Boolean b0, boolean b) {
@@ -49,8 +50,7 @@ public class ParenSymmetry {
         for (char ch : s.toCharArray()) //goes through each char in the loop
             if (s.toCharArray()[0] == ')') { //if the string begins with an open parenthesis its false immediately
                 return false;
-            }
-            else if (ch == '(') {
+            } else if (ch == '(') {
                 counter++; // counter will increase as it sees a left paren
             } else if (ch == ')') {
                 counter--; // counter will decrease as it sees a right paren
@@ -62,27 +62,14 @@ public class ParenSymmetry {
     }
 
 
-    private void checkFile(String filename) throws IOException {
-        ;
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+    private void checkFile(String filename) {
         try {
-            String line;
-            while (true) {
-                try {
-                    if ((line = br.readLine()) == null) break;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println(line);
-            }
-        } finally {
-            br.close();
+            Scanner scanner = new Scanner(new File(filename));
+            while (scanner.hasNext())
+                System.out.println(isBalanced(scanner.nextLine()));
+// Prints out the outcome of isBalanced from the next line beginning at the files start, 0
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
-        // for each line in the file
-      // read the line
-
-        // print whether or not the line's parenthesis are balanced
-        }
-        // CLOSE the file
-
+}
