@@ -62,18 +62,23 @@ public class ParenSymmetry {
     }
 
 
-    private void checkFile(String filename) {
+    private void checkFile(String filename) throws IOException {
+        ;
+        BufferedReader br = new BufferedReader(new FileReader(filename));
         try {
-            FileReader opensFile = new FileReader(filename);
-            BufferedReader readsFile = new BufferedReader(opensFile);
-                while (filename == readsFile.readLine());
-
-                System.out.println(isBalanced(filename));
+            String line;
+            while (true) {
+                try {
+                    if ((line = br.readLine()) == null) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println(line);
+            }
+        } finally {
+            br.close();
         }
-        catch (IOException e) {
-                System.err.println("Caught IOException:");
-        }
-}
+    }
         // for each line in the file
       // read the line
 
